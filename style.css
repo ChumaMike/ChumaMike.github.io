@@ -1,61 +1,255 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chuma Meyiswa | Software Engineer</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
-    <div id="particles-js"></div>
+:root {
+    --bg-dark: #0a192f;
+    --bg-light: #112240;
+    --accent-cyan: #64ffda;
+    --accent-purple: #bd93f9;
+    --text-main: #ccd6f6;
+    --text-muted: #8892b0;
+    --font-mono: 'JetBrains Mono', monospace;
+}
 
-    <nav>
-        <div class="logo">CM.</div>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact" class="btn-highlight">Hire Me</a></li>
-        </ul>
-    </nav>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    <header class="hero">
-        <div class="hero-content">
-            <h1 class="glitch" data-text="Chuma Meyiswa">Chuma Meyiswa</h1>
-            <h2>Software Engineer & <span class="highlight">Creative Problem Solver</span></h2>
-            <p>Bridging the gap between backend logic and frontend design.</p>
-            <div class="cta-group">
-                <a href="#projects" class="btn-primary">View Code</a>
-                <a href="https://github.com/ChumaMike" target="_blank" class="btn-secondary"><i class="fab fa-github"></i> GitHub</a>
-            </div>
-        </div>
-    </header>
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: var(--font-mono); /* Engineering Font */
+    line-height: 1.6;
+    overflow-x: hidden;
+}
 
-    <section id="about" class="glass-panel">
-        <h3>01. The Profile</h3>
-        <p>I am a WeThinkCode student and Technical Mentor[cite: 30], building practical skills in a fast-paced environment. My background in Graphic Design [cite: 35] allows me to create things that work well and look good.</p>
-    </section>
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: var(--bg-dark);
+}
 
-    <section id="skills" class="glass-panel">
-        <h3>02. Tech Stack</h3>
-        <div class="skills-grid">
-            <div class="skill-card"><i class="fab fa-python"></i> Python</div>
-            <div class="skill-card"><i class="fab fa-java"></i> Java</div>
-            <div class="skill-card"><i class="fas fa-database"></i> SQL</div>
-            <div class="skill-card"><i class="fab fa-js"></i> JavaScript</div>
-            <div class="skill-card"><i class="fab fa-linux"></i> Linux</div>
-            <div class="skill-card"><i class="fas fa-paint-brush"></i> UI/Design</div>
-        </div>
-    </section>
+/* --- NAVIGATION --- */
+.glass-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    background: rgba(10, 25, 47, 0.85);
+    border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+}
 
-    <section id="contact" class="glass-panel">
-        <h3>03. Initiating Handshake</h3>
-        <p>Based in Soweto, Gauteng[cite: 2]. Ready to deploy.</p>
-        <a href="mailto:nmeyiswa@gmail.com" class="btn-primary">nmeyiswa@gmail.com</a>
-    </section>
+.logo {
+    color: var(--accent-cyan);
+    font-weight: bold;
+    font-size: 1.5rem;
+}
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="script.js"></script>
-</body>
-</html>
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--accent-cyan);
+}
+
+.btn-highlight {
+    border: 1px solid var(--accent-cyan);
+    padding: 8px 16px;
+    border-radius: 4px;
+    color: var(--accent-cyan) !important;
+}
+
+/* --- HERO SECTION --- */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 10%; /* Center content */
+}
+
+.mono-text {
+    color: var(--accent-cyan);
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.glitch-name {
+    font-size: 4rem;
+    color: #e6f1ff;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 3rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+.bio-text {
+    max-width: 500px;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+}
+
+/* --- BUTTONS --- */
+.btn-primary {
+    display: inline-block;
+    padding: 12px 24px;
+    border: 1px solid var(--accent-cyan);
+    color: var(--accent-cyan);
+    text-decoration: none;
+    border-radius: 4px;
+    margin-right: 20px;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background: rgba(100, 255, 218, 0.1);
+}
+
+.btn-secondary {
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+/* --- SECTIONS --- */
+.section {
+    padding: 100px 10%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: 2rem;
+    color: #e6f1ff;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.section-title::after {
+    content: "";
+    display: block;
+    width: 200px;
+    height: 1px;
+    background: rgba(100, 255, 218, 0.3);
+    margin-left: 20px;
+}
+
+/* --- TIMELINE --- */
+.timeline {
+    border-left: 2px solid var(--accent-cyan);
+    padding-left: 20px;
+}
+
+.timeline-item {
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.timeline-item::before {
+    content: "";
+    position: absolute;
+    left: -29px;
+    top: 5px;
+    width: 16px;
+    height: 16px;
+    background: var(--bg-dark);
+    border: 2px solid var(--accent-cyan);
+    border-radius: 50%;
+}
+
+.company {
+    color: var(--accent-cyan);
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* --- PROJECT GRID --- */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.project-card {
+    background: var(--bg-light);
+    padding: 2rem;
+    border-radius: 4px;
+    transition: transform 0.3s;
+    border: 1px solid transparent;
+}
+
+.project-card:hover {
+    transform: translateY(-7px);
+    border-color: var(--accent-cyan);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.folder-icon {
+    font-size: 40px;
+    color: var(--accent-cyan);
+}
+
+.tech-list {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* --- CERTIFICATES --- */
+.cert-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.cert-item {
+    background: rgba(255,255,255,0.05);
+    padding: 15px 30px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--accent-purple);
+}
+
+.cert-icon {
+    color: var(--accent-purple);
+}
+
+/* --- FOOTER --- */
+.footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}

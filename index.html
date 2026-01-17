@@ -5,55 +5,157 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chuma Meyiswa | Software Engineer</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="particles-js"></div>
-
-    <nav>
-        <div class="logo">CM.</div>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact" class="btn-highlight">Hire Me</a></li>
+    
+    <nav class="glass-nav">
+        <div class="logo">CM_</div>
+        <ul class="nav-links">
+            <li><a href="#about">01. Profile</a></li>
+            <li><a href="#experience">02. Exp</a></li>
+            <li><a href="#projects">03. Works</a></li>
+            <li><a href="#certs">04. Certs</a></li>
+            <li><a href="#contact" class="btn-highlight">Init_Contact</a></li>
         </ul>
     </nav>
 
+    <div id="particles-js"></div>
+
     <header class="hero">
         <div class="hero-content">
-            <h1 class="glitch" data-text="Chuma Meyiswa">Chuma Meyiswa</h1>
-            <h2>Software Engineer & <span class="highlight">Creative Problem Solver</span></h2>
-            <p>Bridging the gap between backend logic and frontend design.</p>
+            <p class="mono-text">Hello, my name is</p>
+            <h1 class="glitch-name">Chuma Meyiswa.</h1>
+            <h2 class="subtitle">I build <span class="typewriter" data-text="Backends., User Interfaces., Scalable Systems., The Future."></span></h2>
+            <p class="bio-text">
+                Software Engineering Student at WeThinkCode_ | Technical Mentor | Graphic Designer.
+                I merge creative design with robust engineering logic to build products that matter.
+            </p>
             <div class="cta-group">
-                <a href="#projects" class="btn-primary">View Code</a>
+                <a href="#projects" class="btn-primary">View Projects</a>
                 <a href="https://github.com/ChumaMike" target="_blank" class="btn-secondary"><i class="fab fa-github"></i> GitHub</a>
             </div>
         </div>
     </header>
 
-    <section id="about" class="glass-panel">
-        <h3>01. The Profile</h3>
-        <p>I am a WeThinkCode student and Technical Mentor[cite: 30], building practical skills in a fast-paced environment. My background in Graphic Design [cite: 35] allows me to create things that work well and look good.</p>
-    </section>
-
-    <section id="skills" class="glass-panel">
-        <h3>02. Tech Stack</h3>
-        <div class="skills-grid">
-            <div class="skill-card"><i class="fab fa-python"></i> Python</div>
-            <div class="skill-card"><i class="fab fa-java"></i> Java</div>
-            <div class="skill-card"><i class="fas fa-database"></i> SQL</div>
-            <div class="skill-card"><i class="fab fa-js"></i> JavaScript</div>
-            <div class="skill-card"><i class="fab fa-linux"></i> Linux</div>
-            <div class="skill-card"><i class="fas fa-paint-brush"></i> UI/Design</div>
+    <section id="experience" class="section glass-panel">
+        <h3 class="section-title">02. Engineering Context</h3>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">Sep 2025 - Present</div>
+                <div class="timeline-content">
+                    <h4>Technical Mentor</h4>
+                    <span class="company">WeThinkCode_</span>
+                    <p>Guiding students in software development, reviewing code, and enforcing best practices in Python and Java.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Sep 2024 - Dec 2025</div>
+                <div class="timeline-content">
+                    <h4>Software Engineering Student</h4>
+                    <span class="company">WeThinkCode_</span>
+                    <p>Intensive curriculum covering Algorithms, Data Structures, SQL, and System Design.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">July 2022 - Jan 2024</div>
+                <div class="timeline-content">
+                    <h4>Graphic Designer</h4>
+                    <span class="company">Meyiswa Training Academy</span>
+                    <p>Bridging the gap between visual arts and digital implementation using Adobe Suite.</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="contact" class="glass-panel">
-        <h3>03. Initiating Handshake</h3>
-        <p>Based in Soweto, Gauteng[cite: 2]. Ready to deploy.</p>
-        <a href="mailto:nmeyiswa@gmail.com" class="btn-primary">nmeyiswa@gmail.com</a>
+    <section id="projects" class="section">
+        <h3 class="section-title">03. Featured Projects</h3>
+        <div class="project-grid">
+            <div class="project-card">
+                <div class="card-header">
+                    <i class="far fa-folder-open folder-icon"></i>
+                    <div class="card-links">
+                        <a href="LINK_TO_GITHUB_REPO" target="_blank"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <h4>Banking System Backend</h4>
+                <p>A secure banking simulation handling transactions and user auth.</p>
+                <ul class="tech-list">
+                    <li>Python</li>
+                    <li>SQLite</li>
+                    <li>Unittest</li>
+                </ul>
+            </div>
+
+            <div class="project-card">
+                <div class="card-header">
+                    <i class="far fa-folder-open folder-icon"></i>
+                    <div class="card-links">
+                        <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <h4>Portfolio V2</h4>
+                <p>This interactive portfolio website designed with a glassmorphism UI.</p>
+                <ul class="tech-list">
+                    <li>HTML5</li>
+                    <li>CSS3</li>
+                    <li>Particles.js</li>
+                </ul>
+            </div>
+
+            <div class="project-card">
+                <div class="card-header">
+                    <i class="far fa-folder-open folder-icon"></i>
+                    <div class="card-links">
+                        <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <h4>Traffic Simulation</h4>
+                <p>Java-based simulation of traffic flow and intersection logic.</p>
+                <ul class="tech-list">
+                    <li>Java</li>
+                    <li>OOP</li>
+                    <li>Swing</li>
+                </ul>
+            </div>
+        </div>
     </section>
+
+    <section id="certs" class="section glass-panel">
+        <h3 class="section-title">04. Certifications</h3>
+        <div class="cert-grid">
+            <div class="cert-item">
+                <i class="fab fa-microsoft cert-icon"></i>
+                <span>Microsoft AI Fluency</span>
+            </div>
+            <div class="cert-item">
+                <i class="fab fa-linux cert-icon"></i>
+                <span>Ubuntu Linux Pro</span>
+            </div>
+            <div class="cert-item">
+                <i class="fab fa-python cert-icon"></i>
+                <span>OpenEDG Python Pro</span>
+            </div>
+            <div class="cert-item">
+                <i class="fab fa-github cert-icon"></i>
+                <span>GitHub Career Essentials</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section text-center">
+        <p class="mono-text">05. What's Next?</p>
+        <h2 class="contact-title">Get In Touch</h2>
+        <p class="contact-desc">
+            I am currently looking for an internship or junior role. Whether you have a question or just want to say hi, my inbox is open.
+        </p>
+        <a href="mailto:nmeyiswa@gmail.com" class="btn-primary big-btn">Say Hello</a>
+    </section>
+
+    <footer class="footer">
+        <p>Built by Chuma Meyiswa | Soweto, SA</p>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
