@@ -1,6 +1,7 @@
+// 1. Particle System Configuration
 particlesJS("particles-js", {
   "particles": {
-    "number": { "value": 50 },
+    "number": { "value": 60 },
     "color": { "value": "#64ffda" },
     "shape": { "type": "circle" },
     "opacity": { "value": 0.5 },
@@ -12,7 +13,7 @@ particlesJS("particles-js", {
       "opacity": 0.2,
       "width": 1
     },
-    "move": { "enable": true, "speed": 2 }
+    "move": { "enable": true, "speed": 1.5 }
   },
   "interactivity": {
     "detect_on": "canvas",
@@ -24,34 +25,35 @@ particlesJS("particles-js", {
   "retina_detect": true
 });
 
-// Typewriter Effect
+// 2. Typewriter Effect Logic
 const textElement = document.querySelector(".typewriter");
-const words = textElement.getAttribute("data-text").split(", ");
-let wordIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
+if (textElement) {
+    const words = textElement.getAttribute("data-text").split(", ");
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
 
-function type() {
-    const currentWord = words[wordIndex];
-    
-    if (isDeleting) {
-        textElement.textContent = currentWord.substring(0, charIndex - 1);
-        charIndex--;
-    } else {
-        textElement.textContent = currentWord.substring(0, charIndex + 1);
-        charIndex++;
-    }
+    function type() {
+        const currentWord = words[wordIndex];
+        
+        if (isDeleting) {
+            textElement.textContent = currentWord.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            textElement.textContent = currentWord.substring(0, charIndex + 1);
+            charIndex++;
+        }
 
-    if (!isDeleting && charIndex === currentWord.length) {
-        isDeleting = true;
-        setTimeout(type, 2000); // Pause at end of word
-    } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-        setTimeout(type, 500); // Pause before next word
-    } else {
-        setTimeout(type, isDeleting ? 100 : 200);
+        if (!isDeleting && charIndex === currentWord.length) {
+            isDeleting = true;
+            setTimeout(type, 2000); // Wait before deleting
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+            setTimeout(type, 500); // Wait before typing next word
+        } else {
+            setTimeout(type, isDeleting ? 50 : 100);
+        }
     }
+    document.addEventListener("DOMContentLoaded", type);
 }
-
-document.addEventListener("DOMContentLoaded", type);

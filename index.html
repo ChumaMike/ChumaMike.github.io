@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chuma Meyiswa | Software Engineer</title>
+    
     <link rel="stylesheet" href="main.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -16,7 +19,6 @@
             <li><a href="#about">01. Profile</a></li>
             <li><a href="#experience">02. Exp</a></li>
             <li><a href="#projects">03. Works</a></li>
-            <li><a href="#certs">04. Certs</a></li>
             <li><a href="#contact" class="btn-highlight">Init_Contact</a></li>
         </ul>
     </nav>
@@ -27,10 +29,10 @@
         <div class="hero-content">
             <p class="mono-text">Hello, my name is</p>
             <h1 class="glitch-name">Chuma Meyiswa.</h1>
-            <h2 class="subtitle">Software Engineer (Backend) | <span class="highlight">Java & Python</span></h2>
+            <h2 class="subtitle">I am a <span class="typewriter" data-text="Backend Engineer., Chess Strategist., Distributed Systems Fan., Problem Solver."></span></h2>
             <p class="bio-text">
-                Distributed Systems | Technical Mentor @ WeThinkCode_ <br>
-                Building scalable backend architectures and solving local problems with code.
+                Software Engineer (Backend) | [cite_start]Technical Mentor @ WeThinkCode_[cite: 30].
+                I merge creative design with robust engineering logic to build scalable systems.
             </p>
             <div class="cta-group">
                 <a href="#projects" class="btn-primary">View Code</a>
@@ -38,14 +40,48 @@
             </div>
         </div>
     </header>
-    <section id="experience" class="section glass-panel">
+
+    <section id="about" class="section glass-panel">
+        <div class="about-container">
+            <div class="about-text">
+                <h3 class="section-title">01. Who is Chuma?</h3>
+                <p>
+                    I treat software engineering like a game of <strong>Chess</strong>: every move requires strategy, foresight, and efficiency.
+                </p>
+                <p>
+                    As a <strong>Technical Mentor</strong> at WeThinkCode_, I spend my days debugging complex logic and teaching students how to survive the command line. [cite_start]When I'm not coding backend architectures in <strong>Java & Python</strong>, you can find me mastering the chessboard or skating through the streets of Soweto[cite: 2].
+                </p>
+                <p class="tagline">I don't just write code; I build systems that survive.</p>
+                
+                <div class="skill-tags">
+                    <span>▹ Java (Spring)</span>
+                    <span>▹ Python (Flask/FastAPI)</span>
+                    <span>▹ Distributed Systems</span>
+                    <span>▹ Chess Strategy</span>
+                    <span>▹ Linux/DevOps</span>
+                </div>
+            </div>
+
+            <div class="about-stats">
+                <h4>Player Stats</h4>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt icon-cyan"></i> Soweto, South Africa</li>
+                    <li><i class="fas fa-graduation-cap icon-cyan"></i> WeThinkCode_ Student</li>
+                    <li><i class="fas fa-chess-knight icon-cyan"></i> Chess Champion</li>
+                    <li><i class="fas fa-code-branch icon-cyan"></i> 218+ GitHub Contribs</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section">
         <h3 class="section-title">02. Engineering Context</h3>
         <div class="timeline">
             <div class="timeline-item">
                 <div class="timeline-date">Sep 2025 - Present</div>
                 <div class="timeline-content">
                     <h4>Technical Mentor</h4>
-                    <span class="company">WeThinkCode_</span>
+                    [cite_start]<span class="company">WeThinkCode_ [cite: 30]</span>
                     <p>Guiding students in software development, reviewing code, and enforcing best practices in Python and Java.</p>
                 </div>
             </div>
@@ -53,7 +89,7 @@
                 <div class="timeline-date">Sep 2024 - Dec 2025</div>
                 <div class="timeline-content">
                     <h4>Software Engineering Student</h4>
-                    <span class="company">WeThinkCode_</span>
+                    [cite_start]<span class="company">WeThinkCode_ [cite: 19]</span>
                     <p>Intensive curriculum covering Algorithms, Data Structures, SQL, and System Design.</p>
                 </div>
             </div>
@@ -61,7 +97,7 @@
                 <div class="timeline-date">July 2022 - Jan 2024</div>
                 <div class="timeline-content">
                     <h4>Graphic Designer</h4>
-                    <span class="company">Meyiswa Training Academy</span>
+                    [cite_start]<span class="company">Meyiswa Training Academy [cite: 35]</span>
                     <p>Bridging the gap between visual arts and digital implementation using Adobe Suite.</p>
                 </div>
             </div>
@@ -73,8 +109,7 @@
         <div class="project-grid">
             
             <div class="project-card">
-                <img src="assets/sentinel.png" alt="Sentinel Ledger Interface" class="project-img">
-                
+                <img src="assets/sentinel.png" alt="Sentinel Ledger" class="project-img" onerror="this.src='https://via.placeholder.com/400x200/112240/64ffda?text=Sentinel+Ledger'">
                 <div class="card-header">
                     <i class="far fa-folder-open folder-icon"></i>
                     <div class="card-links">
@@ -84,15 +119,14 @@
                 <h4>Sentinel Ledger</h4>
                 <p>Enterprise-grade financial ledger featuring double-entry bookkeeping and real-time AI fraud monitoring.</p>
                 <ul class="tech-list">
-                    <li>Java Spring Boot</li>
+                    <li>Java Spring</li>
                     <li>Python FastAPI</li>
                     <li>React</li>
                 </ul>
             </div>
 
             <div class="project-card">
-                <img src="assets/linkup.png" alt="LinkUp Geo Interface" class="project-img">
-                
+                <img src="assets/linkup.png" alt="LinkUp Geo" class="project-img" onerror="this.src='https://via.placeholder.com/400x200/112240/64ffda?text=LinkUp+Geo'">
                 <div class="card-header">
                     <i class="far fa-folder-open folder-icon"></i>
                     <div class="card-links">
@@ -109,8 +143,7 @@
             </div>
 
             <div class="project-card">
-                <img src="assets/skhokho.png" alt="Skhokho App Interface" class="project-img">
-                
+                <img src="assets/skhokho.png" alt="Skhokho App" class="project-img" onerror="this.src='https://via.placeholder.com/400x200/112240/64ffda?text=Skhokho'">
                 <div class="card-header">
                     <i class="far fa-folder-open folder-icon"></i>
                     <div class="card-links">
@@ -118,7 +151,7 @@
                     </div>
                 </div>
                 <h4>Skhokho</h4>
-                <p>Privacy-first personal assistant for SA daily life. Features 'Bala' taxi fare splitter and encrypted journaling.</p>
+                <p>Privacy-first personal assistant. Features 'Bala' taxi fare splitter and encrypted journaling.</p>
                 <ul class="tech-list">
                     <li>Python</li>
                     <li>Cryptography</li>
@@ -129,39 +162,17 @@
         </div>
     </section>
 
-    <section id="certs" class="section glass-panel">
-        <h3 class="section-title">04. Certifications</h3>
-        <div class="cert-grid">
-            <div class="cert-item">
-                <i class="fab fa-microsoft cert-icon"></i>
-                <span>Microsoft AI Fluency</span>
-            </div>
-            <div class="cert-item">
-                <i class="fab fa-linux cert-icon"></i>
-                <span>Ubuntu Linux Pro</span>
-            </div>
-            <div class="cert-item">
-                <i class="fab fa-python cert-icon"></i>
-                <span>OpenEDG Python Pro</span>
-            </div>
-            <div class="cert-item">
-                <i class="fab fa-github cert-icon"></i>
-                <span>GitHub Career Essentials</span>
-            </div>
-        </div>
-    </section>
-
     <section id="contact" class="section text-center">
-        <p class="mono-text">05. What's Next?</p>
+        <p class="mono-text">04. What's Next?</p>
         <h2 class="contact-title">Get In Touch</h2>
         <p class="contact-desc">
-            I am currently looking for an internship or junior role. Whether you have a question or just want to say hi, my inbox is open.
+            I am currently looking for an internship or junior role. Whether you have a question or just want to play a game of chess, my inbox is open.
         </p>
         <a href="mailto:nmeyiswa@gmail.com" class="btn-primary big-btn">Say Hello</a>
     </section>
 
     <footer class="footer">
-        <p>Built by Chuma Meyiswa | Soweto, SA</p>
+        [cite_start]<p>Designed & Built by Chuma Meyiswa[cite: 18].</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
