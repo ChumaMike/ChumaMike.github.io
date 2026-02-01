@@ -10,6 +10,80 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Force the Hero Section to behave */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 90vh;
+            padding-top: 80px;
+            overflow: hidden; /* No scrolling if animation goes wide */
+        }
+
+        .hero-container {
+            display: flex;
+            flex-direction: row; /* Strict side-by-side */
+            align-items: center;
+            justify-content: space-between;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Text Side */
+        .hero-content {
+            flex: 1;
+            padding-right: 40px; /* Space between text and image */
+            z-index: 2;
+        }
+
+        /* Image Side - The "Icon" Container */
+        .hero-image-wrapper {
+            flex: 0 0 250px; /* STRICT WIDTH: 250px only */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+
+        /* The Profile Picture Itself */
+        .profile-pic {
+            width: 250px !important;   /* Force width */
+            height: 250px !important;  /* Force height */
+            object-fit: cover;         /* Smart crop */
+            object-position: top center; /* Focus on face, not chest */
+            border-radius: 50%;        /* Perfect circle */
+            border: 3px solid #64ffda; /* Cyan border */
+            box-shadow: 0 0 30px rgba(100, 255, 218, 0.3); /* Glow */
+            animation: floating 6s ease-in-out infinite;
+            background-color: #112240; /* Fallback color */
+        }
+
+        /* Floating Animation */
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Mobile Responsive Fixes */
+        @media (max-width: 968px) {
+            .hero-container {
+                flex-direction: column-reverse; /* Stack vertically on phones */
+                text-align: center;
+                gap: 30px;
+            }
+            .hero-content {
+                padding-right: 0;
+            }
+            .profile-pic {
+                width: 180px !important; /* Smaller on phone */
+                height: 180px !important;
+            }
+        }
+    </style>
 </head>
 <body>
     
@@ -31,10 +105,10 @@
                 <p class="mono-text">System Status: Online</p>
                 <h1 class="glitch-name">Chuma (Mike) Meyiswa.</h1>
                 <h2 class="subtitle">
-                    Backend Engineer | <span class="typewriter" data-text="AI Agents & Automation., Blockchain & Web3., Distributed Systems., Technical Mentor."></span>
+                    Backend Engineer | <span class="typewriter" data-text="AI Agents., Web3., Distributed Systems., Mentor."></span>
                 </h2>
                 <p class="bio-text">
-                    <strong>Software Engineer (Backend) | AI Agents & Automation | Blockchain & Web3 | Distributed Systems | Technical Mentor @ WeThinkCode_</strong>
+                    <strong>Software Engineer (Backend) | AI Agents & Automation | Blockchain & Web3 | Distributed Systems</strong>
                     <br><br>
                     Merging creative design with robust engineering logic. Currently expanding into Data Engineering and Decentralized Architectures while leading the next generation of developers.
                 </p>
@@ -58,7 +132,7 @@
                     I operate at the intersection of <strong>Distributed Systems</strong> and <strong>Emerging Tech</strong>. My philosophy is simple: build systems that are secure by design and scalable by default.
                 </p>
                 <p>
-                    As a <strong>Technical Mentor</strong>, I enforce architectural integrity. As a <strong>Blockchain Enthusiast</strong>, I am actively building in the Web3 space. Currently, I am deepening my expertise in <strong>Data Engineering</strong> through the FMTALI/ATS Programme to master the pipelines that power AI models.
+                    As a <strong>Technical Mentor</strong>, I enforce architectural integrity. As a <strong>Blockchain Enthusiast</strong>, I am actively building in the Web3 space. Currently, I am deepening my expertise in <strong>Data Engineering</strong> through the FMTALI/ATS Programme.
                 </p>
             </div>
 
