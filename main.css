@@ -410,3 +410,22 @@ body {
         max-width: 300px;
     }
 }
+
+/* Add to main.css */
+.skill-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.skill-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--text-secondary); /* Assuming you have variables, if not use #ccd6f6 */
+}
+
+.skill-item strong {
+    color: #64ffda; /* Your highlight color */
+}
