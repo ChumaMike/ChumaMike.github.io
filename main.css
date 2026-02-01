@@ -7,6 +7,7 @@
     --text-main: #ccd6f6;
     --text-muted: #8892b0;
     --font-mono: 'JetBrains Mono', monospace;
+    --font-sans: 'Inter', sans-serif;
 }
 
 * {
@@ -18,9 +19,13 @@
 body {
     background-color: var(--bg-dark);
     color: var(--text-main);
-    font-family: var(--font-mono);
+    font-family: var(--font-sans); /* Switched body to Inter for readability */
     line-height: 1.6;
     overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-mono); /* Headings stay mono for tech feel */
 }
 
 #particles-js {
@@ -52,6 +57,7 @@ body {
     color: var(--accent-cyan);
     font-weight: bold;
     font-size: 1.5rem;
+    font-family: var(--font-mono);
 }
 
 .nav-links {
@@ -64,6 +70,7 @@ body {
     text-decoration: none;
     color: var(--text-main);
     font-size: 0.9rem;
+    font-family: var(--font-mono);
     transition: 0.3s;
 }
 
@@ -78,33 +85,51 @@ body {
     color: var(--accent-cyan) !important;
 }
 
-/* --- HERO SECTION (Responsive Fixed) --- */
+/* --- FIXED HERO LAYOUT (Split Screen) --- */
 .hero {
-    min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 120px 10% 0;
+    justify-content: center;
+    min-height: 100vh;
+    padding-top: 80px; /* Push down below the nav bar */
+    overflow: hidden;
 }
 
+.hero-container {
+    display: flex;
+    flex-direction: row; /* Forces side-by-side layout */
+    align-items: center;
+    justify-content: space-between; /* Pushes text left, image right */
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 40px;
+}
+
+/* Left Side (Text) */
 .hero-content {
-    max-width: 1000px;
+    flex: 1;
+    max-width: 650px;
+    z-index: 2;
 }
 
 .mono-text {
     color: var(--accent-cyan);
     font-size: 1rem;
     margin-bottom: 20px;
+    font-family: var(--font-mono);
 }
 
 .glitch-name {
-    font-size: 5rem;
+    font-size: 4.5rem;
     color: #e6f1ff;
     margin-bottom: 10px;
     line-height: 1.1;
+    font-family: var(--font-mono);
 }
 
 .subtitle {
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: var(--text-muted);
     margin-bottom: 25px;
     line-height: 1.2;
@@ -114,19 +139,68 @@ body {
     max-width: 540px;
     color: var(--text-muted);
     margin-bottom: 40px;
+    font-size: 1rem;
+}
+
+/* Right Side (Image Wrapper) */
+.hero-image-wrapper {
+    flex: 0 0 320px; /* Fixed width container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+/* The Profile Picture Itself */
+.profile-pic {
+    width: 300px;       /* Fixed size */
+    height: 300px;      /* Fixed size */
+    object-fit: cover;  /* Crops the image perfectly */
+    border-radius: 50%; /* Makes it a circle */
+    border: 3px solid #64ffda; /* Cyan border */
+    box-shadow: 0 0 30px rgba(100, 255, 218, 0.2); /* Soft glow */
+    animation: floating 6s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
 }
 
 /* --- RESPONSIVE MEDIA QUERIES --- */
-@media (max-width: 1080px) {
-    .hero { padding: 150px 5% 0; }
-    .glitch-name { font-size: 4rem; }
-    .subtitle { font-size: 2rem; }
-}
+@media (max-width: 968px) {
+    .hero-container {
+        flex-direction: column-reverse; /* Stack: Image top, Text bottom */
+        text-align: center;
+        gap: 30px;
+        padding-bottom: 50px;
+    }
 
-@media (max-width: 768px) {
-    .nav-links { display: none; } /* Simplified for mobile */
+    .hero-content {
+        align-items: center;
+        text-align: center;
+    }
+
+    .bio-text {
+        margin: 0 auto 40px auto;
+    }
+
     .glitch-name { font-size: 3rem; }
     .subtitle { font-size: 1.5rem; }
+
+    .hero-image-wrapper {
+        flex: auto;
+        width: 100%;
+        margin-right: 0;
+    }
+    
+    .profile-pic {
+        width: 200px;
+        height: 200px;
+    }
+
+    .nav-links { display: none; } /* Hide nav links on mobile */
 }
 
 /* --- BUTTONS --- */
@@ -139,6 +213,7 @@ body {
     border-radius: 4px;
     margin-right: 20px;
     transition: 0.3s;
+    font-family: var(--font-mono);
 }
 
 .btn-primary:hover {
@@ -149,12 +224,7 @@ body {
     color: var(--text-main);
     text-decoration: none;
     font-size: 1.1rem;
-}
-
-.big-btn {
-    padding: 20px 40px;
-    font-size: 1.2rem;
-    margin-top: 20px;
+    font-family: var(--font-mono);
 }
 
 /* --- SECTIONS --- */
@@ -181,7 +251,7 @@ body {
     margin-left: 20px;
 }
 
-/* --- ABOUT SECTION (New) --- */
+/* --- ABOUT SECTION --- */
 .about-container {
     display: flex;
     gap: 50px;
@@ -199,56 +269,52 @@ body {
     color: var(--text-muted);
 }
 
-.tagline {
-    font-weight: bold;
-    color: var(--text-main);
-    margin-top: 20px;
-}
-
-.skill-tags {
-    margin-top: 20px;
-    font-size: 0.9rem;
-}
-
-.skill-tags span {
-    color: var(--accent-cyan);
-    margin-right: 15px;
-    display: inline-block;
-}
-
+/* Technical Arsenal Box */
 .about-stats {
     flex: 1;
-    min-width: 250px;
+    min-width: 280px;
     border: 1px solid var(--accent-cyan);
-    padding: 20px;
+    padding: 25px;
     border-radius: 8px;
     background: rgba(17, 34, 64, 0.5);
 }
 
 .about-stats h4 {
     color: #e6f1ff;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+    padding-bottom: 10px;
 }
 
-.about-stats ul {
-    list-style: none;
+.skill-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-.about-stats li {
-    margin-bottom: 10px;
-    color: var(--text-muted);
+.skill-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
     font-size: 0.9rem;
+    color: var(--text-muted);
 }
 
 .icon-cyan {
     color: var(--accent-cyan);
-    width: 25px;
+    width: 20px;
+    margin-top: 4px; /* Align icon with text */
+}
+
+.skill-item strong {
+    color: var(--accent-cyan);
 }
 
 /* --- TIMELINE --- */
 .timeline {
     border-left: 2px solid var(--accent-cyan);
     padding-left: 20px;
+    margin-left: 10px;
 }
 
 .timeline-item {
@@ -268,23 +334,30 @@ body {
     border-radius: 50%;
 }
 
-.company {
+.timeline-date {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
     color: var(--accent-cyan);
-    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.company {
+    color: #e6f1ff;
+    font-weight: bold;
     display: block;
     margin-bottom: 10px;
 }
 
-/* --- UPDATED PROJECT GRID --- */
+/* --- PROJECT GRID --- */
 .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 25px;
+    gap: 30px;
 }
 
 .project-card {
     background: var(--bg-light);
-    padding: 1.5rem; /* Adjusted padding */
+    padding: 1.5rem;
     border-radius: 4px;
     transition: transform 0.3s;
     border: 1px solid transparent;
@@ -299,12 +372,12 @@ body {
 
 .project-img {
     width: 100%;
-    height: 180px; /* Made slightly taller */
+    height: 180px;
     object-fit: cover;
     border-radius: 4px;
     margin-bottom: 20px;
     border: 1px solid rgba(100, 255, 218, 0.1);
-    background-color: #020c1b; /* Dark fallback if image fails */
+    background-color: #020c1b;
 }
 
 .card-header {
@@ -314,15 +387,11 @@ body {
     margin-bottom: 15px;
 }
 
-/* BIGGER GITHUB ICONS */
 .card-links a {
     color: var(--text-main);
     transition: 0.3s;
     text-decoration: none;
-}
-
-.card-links i {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
 }
 
 .card-links a:hover {
@@ -330,29 +399,48 @@ body {
 }
 
 .folder-icon {
-    font-size: 25px;
+    font-size: 24px;
     color: var(--accent-cyan);
+}
+
+.project-card h4 {
+    color: #e6f1ff;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
 }
 
 .tech-list {
     list-style: none;
     display: flex;
+    flex-wrap: wrap;
     gap: 15px;
-    margin-top: 20px;
+    margin-top: auto; /* Pushes list to bottom */
+    padding-top: 20px;
     font-size: 0.8rem;
+    font-family: var(--font-mono);
     color: var(--text-muted);
 }
 
+/* --- CONTACT SECTION --- */
 .text-center { text-align: center; }
-.footer { text-align: center; padding: 20px; color: var(--text-muted); font-size: 0.8rem; }
 
-/* --- CONTACT HUB STYLES --- */
+.contact-title {
+    font-size: 3rem;
+    color: #e6f1ff;
+    margin-bottom: 20px;
+}
+
+.contact-desc {
+    max-width: 600px;
+    margin: 0 auto 50px;
+    color: var(--text-muted);
+}
+
 .contact-grid {
     display: flex;
     justify-content: center;
     gap: 30px;
-    margin-top: 50px;
-    flex-wrap: wrap; /* Stacks nicely on mobile */
+    flex-wrap: wrap;
 }
 
 .contact-card {
@@ -377,16 +465,15 @@ body {
     box-shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
 }
 
-/* Icon Specific Colors */
 .contact-icon {
     font-size: 3rem;
     margin-bottom: 10px;
     transition: 0.3s;
 }
 
-.contact-card:hover .fa-envelope { color: #ea4335; } /* Gmail Red */
-.contact-card:hover .fa-linkedin-in { color: #0077b5; } /* LinkedIn Blue */
-.contact-card:hover .fa-whatsapp { color: #25d366; } /* WhatsApp Green */
+.contact-card:hover .fa-envelope { color: #ea4335; }
+.contact-card:hover .fa-linkedin-in { color: #0077b5; }
+.contact-card:hover .fa-whatsapp { color: #25d366; }
 
 .contact-card span {
     font-size: 1.1rem;
@@ -397,35 +484,13 @@ body {
 .contact-card small {
     font-size: 0.85rem;
     color: var(--accent-cyan);
+    font-family: var(--font-mono);
 }
 
-/* Mobile Adjustment */
-@media (max-width: 768px) {
-    .contact-grid {
-        flex-direction: column;
-        align-items: center;
-    }
-    .contact-card {
-        width: 100%;
-        max-width: 300px;
-    }
-}
-
-/* Add to main.css */
-.skill-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.skill-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.9rem;
-    color: var(--text-secondary); /* Assuming you have variables, if not use #ccd6f6 */
-}
-
-.skill-item strong {
-    color: #64ffda; /* Your highlight color */
+.footer {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
 }
