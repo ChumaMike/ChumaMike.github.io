@@ -3,90 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chuma Meyiswa | Systems Architect</title>
-    
+    <title>Chuma Meyiswa | Founder & Systems Architect</title>
     <link rel="stylesheet" href="main.css">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
-    <style>
-        /* Force the Hero Section to behave */
-        .hero {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 90vh;
-            padding-top: 80px;
-            overflow: hidden; /* No scrolling if animation goes wide */
-        }
-
-        .hero-container {
-            display: flex;
-            flex-direction: row; /* Strict side-by-side */
-            align-items: center;
-            justify-content: space-between;
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Text Side */
-        .hero-content {
-            flex: 1;
-            padding-right: 40px; /* Space between text and image */
-            z-index: 2;
-        }
-
-        /* Image Side - The "Icon" Container */
-        .hero-image-wrapper {
-            flex: 0 0 250px; /* STRICT WIDTH: 250px only */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2;
-        }
-
-        /* The Profile Picture Itself */
-        .profile-pic {
-            width: 250px !important;   /* Force width */
-            height: 250px !important;  /* Force height */
-            object-fit: cover;         /* Smart crop */
-            object-position: top center; /* Focus on face, not chest */
-            border-radius: 50%;        /* Perfect circle */
-            border: 3px solid #64ffda; /* Cyan border */
-            box-shadow: 0 0 30px rgba(100, 255, 218, 0.3); /* Glow */
-            animation: floating 6s ease-in-out infinite;
-            background-color: #112240; /* Fallback color */
-        }
-
-        /* Floating Animation */
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* Mobile Responsive Fixes */
-        @media (max-width: 968px) {
-            .hero-container {
-                flex-direction: column-reverse; /* Stack vertically on phones */
-                text-align: center;
-                gap: 30px;
-            }
-            .hero-content {
-                padding-right: 0;
-            }
-            .profile-pic {
-                width: 180px !important; /* Smaller on phone */
-                height: 180px !important;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+
+    <!-- Navigation -->
     <nav class="glass-nav">
         <div class="logo">CM_</div>
         <ul class="nav-links">
@@ -95,14 +23,28 @@
             <li><a href="#projects">Catalogue</a></li>
             <li><a href="#contact" class="btn-highlight">Connect</a></li>
         </ul>
+        <button class="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
     </nav>
 
-    <div id="particles-js"></div>
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="#about">Profile</a></li>
+            <li><a href="#experience">Trajectory</a></li>
+            <li><a href="#projects">Catalogue</a></li>
+            <li><a href="#contact">Connect</a></li>
+        </ul>
+    </div>
 
+    <!-- Hero -->
     <header class="hero">
         <div class="hero-container">
             <div class="hero-content">
-                <p class="mono-text">System Status: Online</p>
+                <div class="founder-badge">
+                    <span class="badge-dot"></span> Founder Mode: Active
+                </div>
                 <h1 class="glitch-name">Chuma (Mike) Meyiswa.</h1>
                 <h2 class="subtitle">
                     Backend Engineer | <span class="typewriter" data-text="AI Agents., Web3., Founder., Mentor., Blockchain."></span>
@@ -114,20 +56,49 @@
                 </p>
                 <div class="cta-group">
                     <a href="#projects" class="btn-primary">View Catalogue</a>
-                    <a href="https://github.com/ChumaMike" target="_blank" class="btn-secondary"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="https://github.com/ChumaMike" target="_blank" class="btn-secondary">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number-row">
+                            <span class="stat-number" data-target="100">0</span>
+                            <span class="stat-plus">+</span>
+                        </div>
+                        <span class="stat-label">Developers Mentored</span>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number-row">
+                            <span class="stat-number" data-target="6">0</span>
+                            <span class="stat-plus">+</span>
+                        </div>
+                        <span class="stat-label">Products Built</span>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number-row">
+                            <span class="stat-number" data-target="4">0</span>
+                            <span class="stat-plus">+</span>
+                        </div>
+                        <span class="stat-label">Fellowships</span>
+                    </div>
                 </div>
             </div>
 
             <div class="hero-image-wrapper">
-                <img src="assets/Headshot.jpeg" alt="Chuma Meyiswa" class="profile-pic">
+                <div class="profile-hex-wrapper">
+                    <img src="assets/Headshot.jpeg" alt="Chuma Meyiswa" class="profile-pic">
+                </div>
             </div>
         </div>
     </header>
 
-    <section id="about" class="section glass-panel">
-        <div class="about-container">
+    <!-- About -->
+    <section id="about" class="section">
+        <div class="about-kente-stripe"></div>
+        <h3 class="section-title" data-label="01. About">The Engineer</h3>
+        <div class="about-container reveal">
             <div class="about-text">
-                <h3 class="section-title">The Engineer</h3>
                 <p>
                     I operate at the intersection of <strong>Distributed Systems</strong>, <strong>Emerging Tech</strong>, and <strong>Entrepreneurship</strong>. My philosophy: build systems that are secure by design, scalable by default, and impactful by purpose.
                 </p>
@@ -140,15 +111,15 @@
                 <h4>Technical Arsenal</h4>
                 <div class="skill-grid">
                     <div class="skill-item">
-                        <i class="fas fa-cube icon-cyan"></i>
+                        <i class="fas fa-cube icon-gold"></i>
                         <span><strong>Web3 & Blockchain:</strong> Solidity, Smart Contracts, LegacyLazarus</span>
                     </div>
                     <div class="skill-item">
-                        <i class="fas fa-brain icon-cyan"></i>
+                        <i class="fas fa-brain icon-gold"></i>
                         <span><strong>AI & Data:</strong> AI Agents (Macalaa), Python Data Pipelines, ETL</span>
                     </div>
                     <div class="skill-item">
-                        <i class="fas fa-server icon-cyan"></i>
+                        <i class="fas fa-server icon-gold"></i>
                         <span><strong>Backend Core:</strong> Java (Spring), Python (FastAPI), Distributed Systems</span>
                     </div>
                 </div>
@@ -156,105 +127,118 @@
         </div>
     </section>
 
+    <!-- Experience -->
     <section id="experience" class="section">
-        <h3 class="section-title">Professional Trajectory</h3>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-date">2026 - Present</div>
-                <div class="timeline-content">
-                    <h4>Founder & CEO</h4>
-                    <span class="company">Skhokho Labs</span>
-                    <p>Founded a tech company building African-first software products. Leading product development, engineering architecture, and go-to-market strategy across AI, Web3, and productivity tooling.</p>
+        <h3 class="section-title" data-label="02. Experience">Professional Trajectory</h3>
+        <div class="timeline-v2">
+            <div class="timeline-line"></div>
+
+            <div class="tl-item tl-left reveal reveal-left">
+                <div class="tl-node"><i class="fas fa-rocket"></i></div>
+                <div class="tl-card">
+                    <div class="tl-date">2026 — Present</div>
+                    <h4 class="tl-role">Founder & CEO</h4>
+                    <span class="tl-company">Skhokho Labs</span>
+                    <p class="tl-desc">Founded a tech company building African-first software products. Leading product development, engineering architecture, and go-to-market strategy across AI, Web3, and productivity tooling.</p>
                 </div>
             </div>
 
-            <div class="timeline-item">
-                <div class="timeline-date">2025 - Present</div>
-                <div class="timeline-content">
-                    <h4>Gamification Skills Programme Fellow</h4>
-                    <span class="company">Tshimologong Digital Innovation Precinct — Wits University</span>
-                    <p>Selected for Wits University's Tshimologong gamification and digital innovation programme, applying game mechanics and behavioral design to real-world tech and learning challenges.</p>
+            <div class="tl-item tl-right reveal reveal-right">
+                <div class="tl-node"><i class="fas fa-gamepad"></i></div>
+                <div class="tl-card">
+                    <div class="tl-date">2025 — Present</div>
+                    <h4 class="tl-role">Gamification Skills Programme Fellow</h4>
+                    <span class="tl-company">Tshimologong Digital Innovation Precinct — Wits University</span>
+                    <p class="tl-desc">Selected for Wits University's Tshimologong gamification and digital innovation programme, applying game mechanics and behavioral design to real-world tech and learning challenges.</p>
                 </div>
             </div>
 
-            <div class="timeline-item">
-                <div class="timeline-date">2025 - Present</div>
-                <div class="timeline-content">
-                    <h4>Member — Blockchain & Web3 Builder</h4>
-                    <span class="company">Africa Blockchain Club</span>
-                    <p>Active member of the Africa Blockchain Club, collaborating on decentralized projects, smart contract development, and Web3 ecosystem growth across the continent.</p>
+            <div class="tl-item tl-left reveal reveal-left">
+                <div class="tl-node"><i class="fas fa-link"></i></div>
+                <div class="tl-card">
+                    <div class="tl-date">2025 — Present</div>
+                    <h4 class="tl-role">Member — Blockchain & Web3 Builder</h4>
+                    <span class="tl-company">Africa Blockchain Club</span>
+                    <p class="tl-desc">Active member collaborating on decentralized projects, smart contract development, and Web3 ecosystem growth across the continent.</p>
                 </div>
             </div>
 
-            <div class="timeline-item">
-                <div class="timeline-date">Feb 2026 - Present</div>
-                <div class="timeline-content">
-                    <h4>Data Engineering & Leadership Fellow</h4>
-                    <span class="company">Afrika Tikkun (FMTALI/ATS)</span>
-                    <p>Selected for the Technical Software Development & Leadership Programme. Specializing in Data Engineering pipelines, Big Data architectures, and Executive Leadership while competing in high-level hackathons.</p>
+            <div class="tl-item tl-right reveal reveal-right">
+                <div class="tl-node"><i class="fas fa-database"></i></div>
+                <div class="tl-card">
+                    <div class="tl-date">Feb 2026 — Present</div>
+                    <h4 class="tl-role">Data Engineering & Leadership Fellow</h4>
+                    <span class="tl-company">Afrika Tikkun (FMTALI/ATS)</span>
+                    <p class="tl-desc">Selected for the Technical Software Development & Leadership Programme. Specializing in Data Engineering pipelines, Big Data architectures, and Executive Leadership while competing in high-level hackathons.</p>
                 </div>
             </div>
 
-            <div class="timeline-item">
-                <div class="timeline-date">Sep 2025 - Present</div>
-                <div class="timeline-content">
-                    <h4>Technical Mentor & Code Reviewer</h4>
-                    <span class="company">WeThinkCode_</span>
-                    <p>Orchestrating code review cycles and standardizing pedagogical approaches to Java and Python system design. Leading 100+ developers through complex architectural challenges.</p>
+            <div class="tl-item tl-left reveal reveal-left">
+                <div class="tl-node"><i class="fas fa-chalkboard-teacher"></i></div>
+                <div class="tl-card">
+                    <div class="tl-date">Sep 2025 — Present</div>
+                    <h4 class="tl-role">Technical Mentor & Code Reviewer</h4>
+                    <span class="tl-company">WeThinkCode_</span>
+                    <p class="tl-desc">Orchestrating code review cycles and standardizing pedagogical approaches to Java and Python system design. Leading 100+ developers through complex architectural challenges.</p>
                 </div>
             </div>
 
-            <div class="timeline-item">
-                <div class="timeline-date">Sep 2024 - Dec 2025</div>
-                <div class="timeline-content">
-                    <h4>Software Engineering Fellow</h4>
-                    <span class="company">WeThinkCode_</span>
-                    <p>Intensive curriculum focused on low-level logic, memory management, and enterprise application development.</p>
+            <div class="tl-item tl-right reveal reveal-right">
+                <div class="tl-node"><i class="fas fa-code"></i></div>
+                <div class="tl-card">
+                    <div class="tl-date">Sep 2024 — Dec 2025</div>
+                    <h4 class="tl-role">Software Engineering Fellow</h4>
+                    <span class="tl-company">WeThinkCode_</span>
+                    <p class="tl-desc">Intensive curriculum focused on low-level logic, memory management, and enterprise application development.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Projects -->
     <section id="projects" class="section">
-        <h3 class="section-title">Project Catalogue</h3>
-        <div class="project-grid">
-            
-            <div class="project-card">
-                <img src="assets/LegacyLezarus.png" alt="Legacy Lazarus Interface" class="project-img" onerror="this.src='https://via.placeholder.com/400x200/0f172a/00f3ff?text=Legacy+Lazarus'">
+        <h3 class="section-title" data-label="03. Projects">Project Catalogue</h3>
+        <div class="bento-grid">
+
+            <div class="bento-card featured-lg reveal">
+                <img src="assets/LegacyLezarus.png" alt="Legacy Lazarus Interface" class="project-img"
+                     onerror="this.src='https://via.placeholder.com/600x220/1c1c1c/f0b429?text=Legacy+Lazarus'">
                 <div class="card-header">
                     <div class="card-links">
                         <a href="#" target="_blank" title="View Code"><i class="fab fa-github"></i></a>
                     </div>
-                    <i class="fas fa-link folder-icon"></i>
+                    <span class="project-badge badge-web3">WEB3</span>
                 </div>
                 <h4>Legacy Lazarus</h4>
                 <p>Decentralized digital inheritance protocol on the Blockchain. Smart contracts ensure autonomous asset transfer and data preservation.</p>
                 <ul class="tech-list">
-                    <li>Solidity</li>
-                    <li>Web3.js</li>
-                    <li>Smart Contracts</li>
+                    <li class="tag-gold">Solidity</li>
+                    <li class="tag-gold">Web3.js</li>
+                    <li class="tag-gold">Smart Contracts</li>
                 </ul>
             </div>
 
-            <div class="project-card">
-                <img src="assets/MacalaDevelopment.png" alt="Macalaa AI" class="project-img" onerror="this.src='https://via.placeholder.com/400x200/0f172a/00f3ff?text=Macalaa+AI'">
+            <div class="bento-card featured-md reveal">
+                <img src="assets/MacalaDevelopment.png" alt="Macalaa AI" class="project-img"
+                     onerror="this.src='https://via.placeholder.com/400x220/1c1c1c/9d4edd?text=Macalaa+AI'">
                 <div class="card-header">
                     <div class="card-links">
                         <a href="#" target="_blank" title="View Code"><i class="fab fa-github"></i></a>
                     </div>
-                    <i class="fas fa-robot folder-icon"></i>
+                    <span class="project-badge badge-ai">AI AGENT</span>
                 </div>
                 <h4>Macalaa AI</h4>
                 <p>Autonomous Career Agent and Strategist. Uses LLMs to analyze career trajectories, optimize portfolios, and simulate technical interviews.</p>
                 <ul class="tech-list">
-                    <li>Python</li>
-                    <li>LLM Integration</li>
-                    <li>Agentic Workflow</li>
+                    <li class="tag-gold">Python</li>
+                    <li class="tag-gold">LLM Integration</li>
+                    <li class="tag-gold">Agentic Workflow</li>
                 </ul>
             </div>
 
-            <div class="project-card">
-                <img src="assets/CivicNerveCityOps.png" alt="CivicNerve System" class="project-img" onerror="this.src='https://via.placeholder.com/400x200/0f172a/00f3ff?text=CivicNerve'">
+            <div class="bento-card standard reveal">
+                <img src="assets/CivicNerveCityOps.png" alt="CivicNerve System" class="project-img"
+                     onerror="this.src='https://via.placeholder.com/400x180/1c1c1c/00e5c3?text=CivicNerve'">
                 <div class="card-header">
                     <div class="card-links">
                         <a href="https://github.com/ChumaMike/CivicNerve" target="_blank" title="View Code"><i class="fab fa-github"></i></a>
@@ -264,13 +248,13 @@
                 <h4>CivicNerve</h4>
                 <p>AI agent system bridging communication gaps between citizens and governance infrastructure using autonomous agents.</p>
                 <ul class="tech-list">
-                    <li>Python</li>
-                    <li>AI Agents</li>
-                    <li>Automation</li>
+                    <li class="tag-cyan">Python</li>
+                    <li class="tag-cyan">AI Agents</li>
+                    <li class="tag-cyan">Automation</li>
                 </ul>
             </div>
 
-            <div class="project-card">
+            <div class="bento-card standard reveal">
                 <img src="assets/sentinel.png" alt="Sentinel Ledger" class="project-img">
                 <div class="card-header">
                     <div class="card-links">
@@ -281,13 +265,13 @@
                 <h4>Sentinel Ledger</h4>
                 <p>Enterprise-grade banking simulation featuring double-entry bookkeeping and ACID-compliant transactions.</p>
                 <ul class="tech-list">
-                    <li>Java Spring</li>
-                    <li>PostgreSQL</li>
-                    <li>MVC</li>
+                    <li class="tag-cyan">Java Spring</li>
+                    <li class="tag-cyan">PostgreSQL</li>
+                    <li class="tag-cyan">MVC</li>
                 </ul>
             </div>
 
-            <div class="project-card">
+            <div class="bento-card standard reveal">
                 <img src="assets/linkup.png" alt="LinkUp Geo" class="project-img">
                 <div class="card-header">
                     <div class="card-links">
@@ -298,52 +282,55 @@
                 <h4>LinkUpGeo</h4>
                 <p>Location-aware service integration using Twilio API for real-time WhatsApp communication and geospatial querying.</p>
                 <ul class="tech-list">
-                    <li>Flask</li>
-                    <li>GeoSQL</li>
-                    <li>Twilio API</li>
+                    <li class="tag-cyan">Flask</li>
+                    <li class="tag-cyan">GeoSQL</li>
+                    <li class="tag-cyan">Twilio API</li>
                 </ul>
             </div>
 
-            <div class="project-card">
-                <img src="assets/skhokho.png" alt="Skhokho Interface" class="project-img">
-                <div class="card-header">
-                    <div class="card-links">
-                        <a href="https://github.com/ChumaMike/Skhokho.git" target="_blank" title="View Code"><i class="fab fa-github"></i></a>
+            <div class="bento-card flagship reveal">
+                <div class="flagship-content">
+                    <div class="flagship-text">
+                        <span class="flagship-badge">Flagship Product</span>
+                        <h4>Skhokho Labs</h4>
+                        <p>The flagship product of Skhokho Labs — a privacy-first personal assistant with encrypted journaling, AI-powered insights, and African-context utilities.</p>
+                        <ul class="tech-list">
+                            <li class="tag-gold">Cryptography</li>
+                            <li class="tag-gold">Python</li>
+                            <li class="tag-gold">AI Integration</li>
+                        </ul>
                     </div>
-                    <i class="fas fa-shield-alt folder-icon"></i>
+                    <div class="flagship-image">
+                        <img src="assets/skhokho.png" alt="Skhokho Interface" class="project-img">
+                        <div class="card-links">
+                            <a href="https://github.com/ChumaMike/Skhokho.git" target="_blank" title="View Code"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
                 </div>
-                <h4>Skhokho Labs</h4>
-                <p>The flagship product of Skhokho Labs — a privacy-first personal assistant with encrypted journaling, AI-powered insights, and African-context utilities.</p>
-                <ul class="tech-list">
-                    <li>Cryptography</li>
-                    <li>Python</li>
-                    <li>AI Integration</li>
-                </ul>
             </div>
 
         </div>
     </section>
 
+    <!-- Contact -->
     <section id="contact" class="section text-center">
+        <div class="about-kente-stripe"></div>
         <p class="mono-text">Initiate Handshake</p>
         <h2 class="contact-title">Let's Collaborate</h2>
         <p class="contact-desc">
             Open to partnerships, investor conversations, hackathon collaborations, Web3 projects, and mentorship opportunities.
         </p>
-
-        <div class="contact-grid">
+        <div class="contact-grid reveal-stagger">
             <a href="mailto:nmeyiswa@gmail.com" class="contact-card">
                 <i class="fas fa-envelope contact-icon"></i>
                 <span>Email</span>
                 <small>nmeyiswa@gmail.com</small>
             </a>
-
             <a href="https://www.linkedin.com/in/chuma-mike" target="_blank" class="contact-card">
                 <i class="fab fa-linkedin-in contact-icon"></i>
                 <span>LinkedIn</span>
                 <small>Connect</small>
             </a>
-
             <a href="https://wa.me/27693023981" target="_blank" class="contact-card">
                 <i class="fab fa-whatsapp contact-icon"></i>
                 <span>WhatsApp</span>
@@ -354,9 +341,9 @@
 
     <footer class="footer">
         <p>Engineered by Chuma (Mike) Meyiswa.</p>
+        <p class="footer-sub">Built in Africa.</p>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
