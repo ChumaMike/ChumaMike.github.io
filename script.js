@@ -1,4 +1,36 @@
-// 1. Typewriter Effect
+// 1. Particle System
+particlesJS("particles-js", {
+    particles: {
+        number: { value: 50, density: { enable: true, value_area: 900 } },
+        color: { value: "#64ffda" },
+        shape: { type: "circle" },
+        opacity: { value: 0.35, random: true },
+        size: { value: 2.5, random: true },
+        line_linked: {
+            enable: true,
+            distance: 160,
+            color: "#4c9eff",
+            opacity: 0.15,
+            width: 1
+        },
+        move: { enable: true, speed: 1.2, random: true, out_mode: "out" }
+    },
+    interactivity: {
+        detect_on: "canvas",
+        events: {
+            onhover: { enable: true, mode: "grab" },
+            onclick: { enable: true, mode: "push" },
+            resize: true
+        },
+        modes: {
+            grab: { distance: 180, line_linked: { opacity: 0.5 } },
+            push: { particles_nb: 3 }
+        }
+    },
+    retina_detect: true
+});
+
+// 2. Typewriter Effect
 const textElement = document.querySelector(".typewriter");
 if (textElement) {
     const words = textElement.getAttribute("data-text").split(", ");
