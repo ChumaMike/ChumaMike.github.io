@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 · Page Not Found | Chuma Meyiswa</title>
+    <meta name="description" content="The page you were looking for does not exist on chumamike.github.io.">
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#0a0f1e">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .nf-wrap {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 6%;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        .nf-code {
+            font-family: var(--font-display);
+            font-size: clamp(5rem, 18vw, 11rem);
+            font-weight: 800;
+            line-height: 1;
+            background: linear-gradient(
+                120deg,
+                #e6f1ff 0%,
+                var(--accent-cyan) 30%,
+                var(--accent-blue) 60%,
+                var(--accent-purple) 85%,
+                #e6f1ff 100%
+            );
+            background-size: 220% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer-name 5s linear infinite;
+            margin-bottom: 10px;
+        }
+        .nf-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 3.2vw, 2.2rem);
+            color: var(--text-primary);
+            margin-bottom: 14px;
+        }
+        .nf-desc {
+            color: var(--text-secondary);
+            max-width: 560px;
+            margin: 0 auto 36px;
+            font-size: 0.98rem;
+        }
+        .nf-meta {
+            font-family: var(--font-mono);
+            color: var(--accent-cyan);
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+        .nf-links {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+
+    <nav class="glass-nav">
+        <a href="/index.html" class="logo">CM_</a>
+        <ul class="nav-links">
+            <li><a href="/index.html#about">Profile</a></li>
+            <li><a href="/index.html#experience">Trajectory</a></li>
+            <li><a href="/products.html">Products</a></li>
+            <li><a href="/contact.html" class="btn-highlight">Connect</a></li>
+        </ul>
+        <button class="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="/index.html#about">Profile</a></li>
+            <li><a href="/index.html#experience">Trajectory</a></li>
+            <li><a href="/products.html">Products</a></li>
+            <li><a href="/contact.html">Connect</a></li>
+        </ul>
+    </div>
+
+    <div class="nf-wrap">
+        <div class="nf-meta">// Error 404 · Route not mapped</div>
+        <div class="nf-code">404</div>
+        <h1 class="nf-title">This page slipped out of sync.</h1>
+        <p class="nf-desc">
+            The URL you followed doesn't exist on this server, or it's been moved. No biggie —
+            head back to the home page or jump straight to the products catalogue.
+        </p>
+        <div class="nf-links">
+            <a href="/index.html" class="btn-primary"><i class="fas fa-house"></i>&nbsp; Back home</a>
+            <a href="/products.html" class="btn-primary btn-primary-alt">See products <i class="fas fa-arrow-right"></i></a>
+            <a href="/contact.html" class="btn-secondary"><i class="fas fa-envelope"></i> Connect</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>Engineered by Chuma (Mike) Meyiswa.</p>
+        <p class="footer-sub">Built in Africa.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="/script.js"></script>
+</body>
+</html>
