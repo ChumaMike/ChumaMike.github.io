@@ -1,578 +1,285 @@
-// 1. Particle System
-particlesJS("particles-js", {
-    particles: {
-        number: { value: 50, density: { enable: true, value_area: 900 } },
-        color: { value: "#64ffda" },
-        shape: { type: "circle" },
-        opacity: { value: 0.35, random: true },
-        size: { value: 2.5, random: true },
-        line_linked: {
-            enable: true,
-            distance: 160,
-            color: "#4c9eff",
-            opacity: 0.15,
-            width: 1
-        },
-        move: { enable: true, speed: 1.2, random: true, out_mode: "out" }
-    },
-    interactivity: {
-        detect_on: "canvas",
-        events: {
-            onhover: { enable: true, mode: "grab" },
-            onclick: { enable: true, mode: "push" },
-            resize: true
-        },
-        modes: {
-            grab: { distance: 180, line_linked: { opacity: 0.5 } },
-            push: { particles_nb: 3 }
-        }
-    },
-    retina_detect: true
-});
+/* chumamike.github.io · behaviour
+   Everything here is progressive enhancement. The page reads fine with JS off. */
+(() => {
+    'use strict';
+    const $ = (s, r = document) => r.querySelector(s);
+    const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// 2. Typewriter Effect
-const textElement = document.querySelector(".typewriter");
-if (textElement) {
-    const words = textElement.getAttribute("data-text").split(", ");
-    let wordIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-
-    function type() {
-        const currentWord = words[wordIndex];
-
-        if (isDeleting) {
-            textElement.textContent = currentWord.substring(0, charIndex - 1);
-            charIndex--;
-        } else {
-            textElement.textContent = currentWord.substring(0, charIndex + 1);
-            charIndex++;
-        }
-
-        if (!isDeleting && charIndex === currentWord.length) {
-            isDeleting = true;
-            setTimeout(type, 2000);
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            wordIndex = (wordIndex + 1) % words.length;
-            setTimeout(type, 500);
-        } else {
-            setTimeout(type, isDeleting ? 50 : 100);
-        }
+    /* ---------- toast ---------- */
+    const toastEl = $('#toast');
+    let toastTimer;
+    function toast(msg) {
+        if (!toastEl) return;
+        toastEl.textContent = msg;
+        toastEl.classList.add('is-on');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toastEl.classList.remove('is-on'), 1800);
     }
 
-    type();
-}
-
-// 2. Custom Cursor
-const cursorDot  = document.querySelector('.cursor-dot');
-const cursorRing = document.querySelector('.cursor-ring');
-
-if (cursorDot && cursorRing) {
-    let ringX = 0, ringY = 0;
-    let mouseX = 0, mouseY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        cursorDot.style.left = mouseX + 'px';
-        cursorDot.style.top  = mouseY + 'px';
-    });
-
-    // Ring follows with smooth lag
-    function animateRing() {
-        ringX += (mouseX - ringX) * 0.12;
-        ringY += (mouseY - ringY) * 0.12;
-        cursorRing.style.left = ringX + 'px';
-        cursorRing.style.top  = ringY + 'px';
-        requestAnimationFrame(animateRing);
+    /* ---------- theme ---------- */
+    const root = document.documentElement;
+    function currentTheme() {
+        const set = root.getAttribute('data-theme');
+        if (set === 'light' || set === 'dark') return set;
+        return matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
     }
-    animateRing();
-
-    document.querySelectorAll('a, button').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursorDot.style.transform        = 'translate(-50%, -50%) scale(0)';
-            cursorRing.style.width           = '54px';
-            cursorRing.style.height          = '54px';
-            cursorRing.style.borderColor     = 'var(--accent-cyan)';
-            cursorRing.style.backgroundColor = 'rgba(100,255,218,0.06)';
-        });
-        el.addEventListener('mouseleave', () => {
-            cursorDot.style.transform        = 'translate(-50%, -50%) scale(1)';
-            cursorRing.style.width           = '36px';
-            cursorRing.style.height          = '36px';
-            cursorRing.style.borderColor     = 'rgba(100,255,218,0.5)';
-            cursorRing.style.backgroundColor = 'transparent';
-        });
-    });
-}
-
-// 3. Scroll Reveal — IntersectionObserver
-const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            revealObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.12 });
-
-document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => {
-    revealObserver.observe(el);
-});
-
-// 4. Stat Counter Animation
-const statObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const el       = entry.target;
-            const target   = parseInt(el.dataset.target);
-            const duration = 1800;
-            const step     = target / (duration / 16);
-            let current    = 0;
-
-            const timer = setInterval(() => {
-                current += step;
-                if (current >= target) {
-                    el.textContent = target;
-                    clearInterval(timer);
-                } else {
-                    el.textContent = Math.floor(current);
-                }
-            }, 16);
-
-            statObserver.unobserve(el);
-        }
-    });
-}, { threshold: 0.5 });
-
-document.querySelectorAll('.stat-number').forEach(el => statObserver.observe(el));
-
-// 5. Hamburger Menu
-const hamburger  = document.querySelector('.hamburger');
-const mobileMenu = document.querySelector('.mobile-menu');
-
-if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        mobileMenu.classList.toggle('open');
-        document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    $('#theme-btn')?.addEventListener('click', () => {
+        const next = currentTheme() === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('theme', next); } catch (_) {}
     });
 
-    document.querySelectorAll('.mobile-menu a').forEach(link => {
-        link.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            mobileMenu.classList.remove('open');
-            document.body.style.overflow = '';
-        });
-    });
-}
+    /* ---------- nav ---------- */
+    const nav = $('.nav');
+    const onScroll = () => nav?.classList.toggle('is-scrolled', scrollY > 8);
+    onScroll();
+    addEventListener('scroll', onScroll, { passive: true });
 
-// 6. Nav Scroll State
-const nav = document.querySelector('.glass-nav');
-if (nav) {
-    window.addEventListener('scroll', () => {
-        nav.classList.toggle('nav-scrolled', window.scrollY > 80);
-    }, { passive: true });
-}
+    const menuBtn = $('#menu-btn');
+    const mobileMenu = $('#mobile-menu');
+    function setMenu(open) {
+        if (!menuBtn || !mobileMenu) return;
+        mobileMenu.hidden = !open;
+        menuBtn.setAttribute('aria-expanded', String(open));
+        menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+    menuBtn?.addEventListener('click', () => setMenu(mobileMenu.hidden));
+    mobileMenu?.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+    addEventListener('keydown', e => { if (e.key === 'Escape' && mobileMenu && !mobileMenu.hidden) setMenu(false); });
 
-// 7. Project card hover-to-play videos
-(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
-
-    document.querySelectorAll('.bento-card').forEach(card => {
-        const video = card.querySelector('.project-video');
-        if (!video) return;
-
-        let loaded = false;
-        const ensureLoaded = () => {
-            if (loaded) return;
-            video.load();
-            loaded = true;
-        };
-
-        const play = () => {
-            ensureLoaded();
-            const attempt = video.play();
-            if (attempt && typeof attempt.catch === 'function') {
-                attempt.catch(() => {});
-            }
-        };
-
-        const stop = () => {
-            video.pause();
-            try { video.currentTime = 0; } catch (_) {}
-        };
-
-        card.addEventListener('mouseenter', play);
-        card.addEventListener('mouseleave', stop);
-        card.addEventListener('focusin', play);
-        card.addEventListener('focusout', stop);
-    });
-})();
-
-// 8. Soweto live clock (Africa/Johannesburg)
-(() => {
-    const el = document.getElementById('hud-time');
-    if (!el) return;
-    const tick = () => {
-        const now = new Date();
-        try {
-            el.textContent = now.toLocaleTimeString('en-GB', {
-                timeZone: 'Africa/Johannesburg',
-                hour12: false
+    // Highlight the nav link for the section in view.
+    const sectionLinks = $$('.nav-links a[href^="#"]');
+    const sections = sectionLinks.map(a => $(a.getAttribute('href'))).filter(Boolean);
+    if ('IntersectionObserver' in window && sections.length) {
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(en => {
+                if (!en.isIntersecting) return;
+                sectionLinks.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + en.target.id));
             });
-        } catch (_) {
-            const pad = n => String(n).padStart(2, '0');
-            el.textContent = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
-        }
+        }, { rootMargin: '-40% 0px -55% 0px' });
+        sections.forEach(s => io.observe(s));
+    }
+
+    /* ---------- reveal on scroll ---------- */
+    const revealTargets = $$('.card, .principle, .timeline-list li, .exp li, .cert-grid li, .contact-grid li, .site-list li');
+    if (!reduceMotion && 'IntersectionObserver' in window) {
+        revealTargets.forEach(el => el.classList.add('reveal'));
+        const ro = new IntersectionObserver(entries => {
+            entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('is-in'); ro.unobserve(en.target); } });
+        }, { threshold: 0.08 });
+        revealTargets.forEach(el => ro.observe(el));
+        // Safety net: never leave content hidden if the observer misfires.
+        setTimeout(() => revealTargets.forEach(el => el.classList.add('is-in')), 2500);
+    }
+
+    /* ---------- room hotspots ---------- */
+    const room = $('.room');
+    const tip = $('#room-tip');
+    const roomWrap = $('.room-wrap');
+    if (room && tip && roomWrap) {
+        const show = (hs) => {
+            const label = hs.getAttribute('data-label');
+            if (!label) return;
+            const r = hs.getBoundingClientRect();
+            const w = roomWrap.getBoundingClientRect();
+            tip.textContent = label;
+            tip.style.left = (r.left - w.left + r.width / 2) + 'px';
+            tip.style.top = (r.top - w.top) + 'px';
+            tip.classList.add('is-on');
+        };
+        const hide = () => tip.classList.remove('is-on');
+        $$('.hs', room).forEach(hs => {
+            hs.addEventListener('pointerenter', () => show(hs));
+            hs.addEventListener('pointerleave', hide);
+            hs.addEventListener('focus', () => show(hs));
+            hs.addEventListener('blur', hide);
+            hs.addEventListener('click', e => {
+                // Smooth-scroll inside the page; SVG <a> navigation works without this too.
+                const href = hs.getAttribute('href');
+                const target = href && $(href);
+                if (!target) return;
+                e.preventDefault();
+                hide();
+                target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+                history.replaceState(null, '', href);
+            });
+        });
+    }
+
+    /* ---------- SAST clock ---------- */
+    const clock = $('#sast-time');
+    if (clock) {
+        const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Africa/Johannesburg', hour: '2-digit', minute: '2-digit' });
+        const tick = () => { clock.textContent = 'now ' + fmt.format(new Date()); };
+        tick();
+        setInterval(tick, 30000);
+    }
+
+    /* ---------- command palette ---------- */
+    const cmd = $('#cmd');
+    const cmdInput = $('#cmd-input');
+    const cmdList = $('#cmd-list');
+    const copyEmail = async () => {
+        try { await navigator.clipboard.writeText('nmeyiswa@gmail.com'); toast('Email copied'); }
+        catch (_) { toast('Could not copy'); }
     };
-    tick();
-    setInterval(tick, 1000);
-})();
-
-// 9. Command Palette (⌘K / Ctrl+K)
-(() => {
-    const palette = document.getElementById('cmd-palette');
-    const input = document.getElementById('cmd-input');
-    const list = document.getElementById('cmd-list');
-    if (!palette || !input || !list) return;
-
     const commands = [
-        { title: 'Home', desc: 'index.html', icon: 'fa-house', kw: 'home profile about', run: () => (location.href = 'index.html') },
-        { title: 'Products', desc: 'The full catalogue · 18+ projects', icon: 'fa-briefcase', kw: 'products projects work catalogue portfolio', run: () => (location.href = 'products.html') },
-        { title: 'Contact', desc: 'Start a conversation', icon: 'fa-envelope-open-text', kw: 'contact connect hire email talk', run: () => (location.href = 'contact.html') },
-        { title: 'The Designer', desc: 'Graphic design practice · Figma · Adobe', icon: 'fa-palette', kw: 'design designer graphic figma illustrator photoshop', run: () => (location.href = 'index.html#design') },
-        { title: 'Certifications', desc: 'Microsoft · Canonical · OpenEDG · WeThinkCode_', icon: 'fa-certificate', kw: 'certifications credentials certs', run: () => (location.href = 'index.html#credentials') },
-        { title: 'Trajectory', desc: 'Experience timeline', icon: 'fa-route', kw: 'experience trajectory timeline career roles', run: () => (location.href = 'index.html#experience') },
-        { title: 'Featured Work', desc: 'Homepage project teaser', icon: 'fa-star', kw: 'featured', run: () => (location.href = 'index.html#featured') },
-        { title: 'Copy email address', desc: 'nmeyiswa@gmail.com', icon: 'fa-copy', kw: 'copy email clipboard', run: async () => {
-            try { await navigator.clipboard.writeText('nmeyiswa@gmail.com'); toast('Email copied'); }
-            catch (_) { toast('Could not copy', true); }
-        }},
-        { title: 'Send email', desc: 'Opens your mail client', icon: 'fa-envelope', kw: 'email mail compose', run: () => (location.href = 'mailto:nmeyiswa@gmail.com') },
-        { title: 'GitHub · @ChumaMike', desc: 'github.com/ChumaMike', icon: 'fa-github', brand: true, kw: 'github code repos', run: () => window.open('https://github.com/ChumaMike', '_blank') },
-        { title: 'LinkedIn · chuma-mike', desc: 'Connect professionally', icon: 'fa-linkedin-in', brand: true, kw: 'linkedin professional', run: () => window.open('https://www.linkedin.com/in/chuma-mike', '_blank') },
-        { title: 'WhatsApp · +27 69 302 3981', desc: 'Direct message', icon: 'fa-whatsapp', brand: true, kw: 'whatsapp sms message dm', run: () => window.open('https://wa.me/27693023981', '_blank') },
-        { title: 'Skhokho Labs', desc: 'skhokholabs.xyz · The startup', icon: 'fa-rocket', kw: 'skhokho labs startup company', run: () => window.open('https://skhokholabs.xyz', '_blank') },
-        { title: 'Open secret terminal', desc: 'Or just press ` (backtick)', icon: 'fa-terminal', kw: 'terminal console shell secret easter', run: () => { closePalette(); setTimeout(openTerminal, 120); } },
+        { t: 'Live right now', d: '#now', kw: 'now live bonablock gcina skhokho products', run: () => go('#now') },
+        { t: '2026 hackathon record', d: '#work', kw: 'work projects hackathons builds', run: () => go('#work') },
+        { t: 'How I build', d: '#how', kw: 'how principles stack tech', run: () => go('#how') },
+        { t: 'Experience', d: '#experience', kw: 'experience roles timeline career founder mentor', run: () => go('#experience') },
+        { t: 'Credentials', d: '#credentials', kw: 'certifications certs credentials nqf', run: () => go('#credentials') },
+        { t: 'Sites for small businesses', d: '#sites', kw: 'sites clients websites soweto', run: () => go('#sites') },
+        { t: 'Off the clock', d: '#offclock', kw: 'skate skateboard ps5 games hobbies', run: () => go('#offclock') },
+        { t: 'Get in touch', d: '#contact', kw: 'contact email hire talk', run: () => go('#contact') },
+        { t: 'Copy email address', d: 'nmeyiswa@gmail.com', kw: 'copy email clipboard', run: copyEmail },
+        { t: 'Open BonaBlock', d: 'bonablock.vercel.app', kw: 'bonablock avalanche schools', run: () => open('https://bonablock.vercel.app') },
+        { t: 'Open Gcina dashboard', d: 'gcina.vercel.app', kw: 'gcina xrpl payments', run: () => open('https://gcina.vercel.app') },
+        { t: 'Open Skhokho', d: 'skhokho.sgdataint.co.za', kw: 'skhokho till shop', run: () => open('https://skhokho.sgdataint.co.za') },
+        { t: 'GitHub · @ChumaMike', d: 'github.com/ChumaMike', kw: 'github code repos', run: () => open('https://github.com/ChumaMike') },
+        { t: 'LinkedIn · chuma-mike', d: 'linkedin.com', kw: 'linkedin', run: () => open('https://www.linkedin.com/in/chuma-mike') },
+        { t: 'WhatsApp', d: 'wa.me', kw: 'whatsapp message chat', run: () => open('https://wa.me/27693023981') },
+        { t: 'Skhokho Labs', d: 'skhokholabs.xyz', kw: 'skhokho labs company startup', run: () => open('https://skhokholabs.xyz') },
+        { t: 'Toggle theme', d: 'light / dark', kw: 'theme dark light mode', run: () => $('#theme-btn')?.click() },
+        { t: 'Open terminal', d: 'or press `', kw: 'terminal console shell easter egg', run: () => setTimeout(openTerm, 80) },
     ];
+    function go(hash) { const el = $(hash); if (el) { el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' }); history.replaceState(null, '', hash); } }
+    function open(url) { window.open(url, '_blank', 'noopener'); }
 
     let filtered = commands.slice();
     let selected = 0;
-
-    function render() {
-        if (!filtered.length) {
-            list.innerHTML = '<li class="cmd-palette-empty">No commands match. Try <kbd>projects</kbd> or <kbd>email</kbd>.</li>';
-            return;
-        }
-        list.innerHTML = filtered.map((c, i) => `
-            <li class="cmd-item" data-idx="${i}" data-selected="${i === selected}" role="option">
-                <div class="cmd-item-icon"><i class="fa${c.brand ? 'b' : 's'} ${c.icon}"></i></div>
-                <div class="cmd-item-body">
-                    <span class="cmd-item-title">${c.title}</span>
-                    <span class="cmd-item-desc">${c.desc}</span>
-                </div>
-                <span class="cmd-item-enter">↵</span>
-            </li>
-        `).join('');
-
-        list.querySelectorAll('.cmd-item').forEach(el => {
-            el.addEventListener('mousemove', () => {
-                selected = parseInt(el.dataset.idx, 10);
-                updateSelection();
-            });
-            el.addEventListener('click', () => {
-                selected = parseInt(el.dataset.idx, 10);
-                runSelected();
-            });
+    function renderCmd() {
+        if (!cmdList) return;
+        if (!filtered.length) { cmdList.innerHTML = '<li class="cmd-empty">Nothing matches. Try "work" or "email".</li>'; return; }
+        cmdList.innerHTML = filtered.map((c, i) =>
+            `<li class="cmd-item" role="option" data-i="${i}" aria-selected="${i === selected}"><span class="t">${esc(c.t)}</span><span class="d">${esc(c.d)}</span></li>`
+        ).join('');
+        $$('.cmd-item', cmdList).forEach(li => {
+            li.addEventListener('mousemove', () => { selected = +li.dataset.i; markCmd(); });
+            li.addEventListener('click', () => { selected = +li.dataset.i; runCmd(); });
         });
     }
-
-    function updateSelection() {
-        list.querySelectorAll('.cmd-item').forEach(el => {
-            el.dataset.selected = (parseInt(el.dataset.idx, 10) === selected).toString();
-        });
-        const active = list.querySelector(`[data-idx="${selected}"]`);
-        if (active) active.scrollIntoView({ block: 'nearest' });
+    function markCmd() {
+        $$('.cmd-item', cmdList).forEach(li => li.setAttribute('aria-selected', String(+li.dataset.i === selected)));
+        cmdList.querySelector(`[data-i="${selected}"]`)?.scrollIntoView({ block: 'nearest' });
     }
-
-    function filter() {
-        const q = input.value.trim().toLowerCase();
-        if (!q) { filtered = commands.slice(); }
-        else {
-            filtered = commands.filter(c =>
-                (c.title + ' ' + c.desc + ' ' + (c.kw || '')).toLowerCase().includes(q)
-            );
-        }
+    function filterCmd() {
+        const q = (cmdInput?.value || '').trim().toLowerCase();
+        filtered = q ? commands.filter(c => (c.t + ' ' + c.d + ' ' + c.kw).toLowerCase().includes(q)) : commands.slice();
         selected = 0;
-        render();
+        renderCmd();
     }
-
-    function runSelected() {
-        const c = filtered[selected];
-        if (!c) return;
-        closePalette();
-        setTimeout(() => c.run(), 80);
-    }
-
-    function openPalette() {
-        palette.classList.add('is-open');
-        palette.setAttribute('aria-hidden', 'false');
-        input.value = '';
-        filter();
-        setTimeout(() => input.focus(), 40);
-    }
-
-    function closePalette() {
-        palette.classList.remove('is-open');
-        palette.setAttribute('aria-hidden', 'true');
-    }
-
-    // Global shortcut
-    document.addEventListener('keydown', (e) => {
-        const key = e.key.toLowerCase();
-        if ((e.metaKey || e.ctrlKey) && key === 'k') {
-            e.preventDefault();
-            palette.classList.contains('is-open') ? closePalette() : openPalette();
-        } else if (palette.classList.contains('is-open')) {
-            if (key === 'escape') { e.preventDefault(); closePalette(); }
-            else if (key === 'arrowdown') { e.preventDefault(); selected = Math.min(filtered.length - 1, selected + 1); updateSelection(); }
-            else if (key === 'arrowup')   { e.preventDefault(); selected = Math.max(0, selected - 1); updateSelection(); }
-            else if (key === 'enter')     { e.preventDefault(); runSelected(); }
-        }
+    function runCmd() { const c = filtered[selected]; if (!c) return; closeCmd(); setTimeout(c.run, 60); }
+    function openCmd() { if (!cmd) return; closeTerm(); cmd.hidden = false; if (cmdInput) cmdInput.value = ''; filterCmd(); setTimeout(() => cmdInput?.focus(), 30); }
+    function closeCmd() { if (cmd) cmd.hidden = true; }
+    $('#palette-btn')?.addEventListener('click', openCmd);
+    cmdInput?.addEventListener('input', filterCmd);
+    cmd?.addEventListener('click', e => { if (e.target.hasAttribute('data-cmd-close')) closeCmd(); });
+    cmdInput?.addEventListener('keydown', e => {
+        if (e.key === 'ArrowDown') { e.preventDefault(); selected = Math.min(selected + 1, filtered.length - 1); markCmd(); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); selected = Math.max(selected - 1, 0); markCmd(); }
+        else if (e.key === 'Enter') { e.preventDefault(); runCmd(); }
     });
 
-    input.addEventListener('input', filter);
-
-    palette.querySelectorAll('[data-cmd-close]').forEach(el => {
-        el.addEventListener('click', closePalette);
-    });
-
-    // Expose for terminal handoff
-    window.__closeCmdPalette = closePalette;
-
-    filter();
-})();
-
-// 10. Terminal Easter Egg (backtick)
-let openTerminal = () => {};
-let closeTerminal = () => {};
-(() => {
-    const term = document.getElementById('term');
-    const input = document.getElementById('term-input');
-    const body = document.getElementById('term-body');
-    if (!term || !input || !body) return;
-
-    const history = [];
-    let historyIdx = -1;
-
-    const banner = `
-<div class="term-line"><span class="t-c">chuma@soweto:~</span> · welcome. typed commands below.</div>
-<div class="term-line">  ⚡  Type <span class="t-c">help</span> to see what I respond to.</div>
-<div class="term-line">  💡  Hit <span class="t-c">esc</span> or click the red dot to close.</div>
-<div class="term-line">&nbsp;</div>
-    `.trim();
-
+    /* ---------- terminal ---------- */
+    const term = $('#term');
+    const termBody = $('#term-body');
+    const termInput = $('#term-input');
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const line = (html, cls = '') => `<div class="term-line ${cls}">${html}</div>`;
+    const link = (href, text) => `<a href="${href}" target="_blank" rel="noopener">${esc(text || href)}</a>`;
     const banners = {
-        whoami: `<div class="term-line"><span class="t-c">Chuma (Mike) Meyiswa</span></div>
-<div class="term-line">  Founder · Skhokho Labs (skhokholabs.xyz)</div>
-<div class="term-line">  Software Engineer · NQF Level 6 · WeThinkCode_</div>
-<div class="term-line">  Base · Soweto, Gauteng, South Africa</div>`,
-
-        projects: `<div class="term-line">Featured builds →</div>
-<div class="term-line">  <span class="t-c">legacy-lazarus</span>  refactors cursed code with an LLM</div>
-<div class="term-line">  <span class="t-c">macala-agent</span>    LLM career strategist</div>
-<div class="term-line">  <span class="t-c">civic-nerve</span>     autonomous city-ops AI</div>
-<div class="term-line">  <span class="t-c">skhokho</span>         the flagship LifeOS</div>
-<div class="term-line">  <span class="t-c">chain-quest</span>     web3 learning RPG</div>
-<div class="term-line">  <span class="t-c">load-shedd</span>      message-driven SA integration</div>
-<div class="term-line">&nbsp;</div>
-<div class="term-line"><a href="products.html">→ see the full catalogue</a></div>`,
-
-        contact: `<div class="term-line">📧  nmeyiswa@gmail.com</div>
-<div class="term-line">💼  linkedin.com/in/chuma-mike</div>
-<div class="term-line">🐙  github.com/ChumaMike</div>
-<div class="term-line">💬  wa.me/27693023981</div>
-<div class="term-line">🚀  skhokholabs.xyz</div>`,
-
-        stack: `<div class="term-line">Languages · Python, Java, TypeScript, JavaScript, SQL</div>
-<div class="term-line">Backend   · Django, Flask, Spring Boot, Node, Firebase</div>
-<div class="term-line">Frontend  · React, Next.js, HTML, CSS</div>
-<div class="term-line">Design    · Figma, Illustrator, Photoshop</div>
-<div class="term-line">DevOps    · Git, GitHub Actions, Docker, Linux, CI/CD</div>`,
-
-        skills: `<div class="term-line">See <span class="t-c">stack</span> for the toolbelt.</div>`,
-
-        skhokho: `<div class="term-line">Opening <a href="https://skhokholabs.xyz" target="_blank">skhokholabs.xyz</a>…</div>`,
-
-        cv: `<div class="term-line">CV available on request → <a href="mailto:nmeyiswa@gmail.com?subject=CV%20Request">ping me</a>.</div>`,
-
-        socials: `<div class="term-line"><a href="https://github.com/ChumaMike" target="_blank">github</a> · <a href="https://www.linkedin.com/in/chuma-mike" target="_blank">linkedin</a> · <a href="https://wa.me/27693023981" target="_blank">whatsapp</a></div>`,
-
-        molo: `<div class="term-line">Molo! 👋  That's hello in isiXhosa.</div>`,
-
-        date: () => `<div class="term-line">${new Date().toLocaleString('en-GB', { timeZone: 'Africa/Johannesburg' })} SAST</div>`,
-
-        echo: (args) => `<div class="term-line">${args.join(' ') || ''}</div>`,
-
-        sudo: () => `<div class="term-line err">chuma is not in the sudoers file.  This incident will be reported.</div>`,
+        help: [
+            'Commands:',
+            '  <span class="t-c">whoami</span>    who is this',
+            '  <span class="t-c">now</span>       what is live',
+            '  <span class="t-c">projects</span>  the 2026 record',
+            '  <span class="t-c">stack</span>     the toolbelt',
+            '  <span class="t-c">contact</span>   ways to reach me',
+            '  <span class="t-c">cv</span>        CV on request',
+            '  <span class="t-c">date</span>      time in Soweto',
+            '  <span class="t-c">molo</span>      say hi',
+            '  <span class="t-c">clear</span>     wipe the screen',
+            '  <span class="t-c">exit</span>      close the terminal',
+        ],
+        whoami: [
+            '<span class="t-c">Chuma (Mike) Meyiswa</span>',
+            '  Software Engineer (Backend) · AI agents · Blockchain',
+            '  Founder, Skhokho Labs · Technical Mentor, WeThinkCode_',
+            '  Soweto, Johannesburg, South Africa',
+        ],
+        now: [
+            `  <span class="t-c">bonablock</span>  ${link('https://bonablock.vercel.app')}   schools · Avalanche · independent verification`,
+            `  <span class="t-c">gcina</span>      ${link('https://gcina.vercel.app')}       AP agent · XRPL multi-sign · testnet`,
+            `  <span class="t-c">skhokho</span>    ${link('https://skhokho.sgdataint.co.za')} shop · till · loyalty · live`,
+        ],
+        projects: [
+            '  2026-11  BonaBlock      UJ BACISS · Avalanche',
+            '  2026-11  Gcina          W3Node · Agentic Finance (XRPL)',
+            "  2026-11  Shay' iPost    NEMISA Discothon",
+            '  2026-10  Mgadi          HackSecure · SMME cyber',
+            '  2026-10  Skhokho        FNB App of the Year',
+            '  2026-10  SafeGuard SA   Gauteng Youth Tech Expo',
+            '  2026-07  GridWise       Microsoft Copilot Studio',
+            '',
+            '  <a href="#work">→ details on the page</a>',
+        ],
+        stack: [
+            '  Languages  TypeScript · Java · Python · Solidity · SQL',
+            '  Backend    Next.js · Node · Spring Boot · FastAPI · Flask · Postgres',
+            '  Agents     LLM tool-calling · LangChain · Copilot Studio',
+            '  Web3       Avalanche (EVM) · XRP Ledger · Hardhat · viem',
+            '  Shipping   Vercel · GitHub Actions · Docker · Linux · Playwright',
+        ],
+        contact: [
+            `  email     ${link('mailto:nmeyiswa@gmail.com', 'nmeyiswa@gmail.com')}`,
+            `  linkedin  ${link('https://www.linkedin.com/in/chuma-mike', 'in/chuma-mike')}`,
+            `  github    ${link('https://github.com/ChumaMike', '@ChumaMike')}`,
+            `  whatsapp  ${link('https://wa.me/27693023981', '+27 69 302 3981')}`,
+        ],
+        cv: [`  CV on request → ${link('mailto:nmeyiswa@gmail.com?subject=CV%20request', 'ping me')}`],
+        molo: ['  Molo! 👋  That is hello in isiXhosa.'],
+        sudo: ['<span class="t-e">chuma is not in the sudoers file. This incident will be reported.</span>'],
+        ls: ['  now/  work/  how/  experience/  credentials/  sites/  offclock/  contact/'],
     };
-
-    banners.help = `<div class="term-line">Commands:</div>
-<div class="term-line">  <span class="t-c">whoami</span>    who is this</div>
-<div class="term-line">  <span class="t-c">projects</span>  featured builds</div>
-<div class="term-line">  <span class="t-c">contact</span>   ways to reach me</div>
-<div class="term-line">  <span class="t-c">stack</span>     the toolbelt</div>
-<div class="term-line">  <span class="t-c">socials</span>   all the links</div>
-<div class="term-line">  <span class="t-c">skhokho</span>   open the startup site</div>
-<div class="term-line">  <span class="t-c">cv</span>        CV on request</div>
-<div class="term-line">  <span class="t-c">date</span>      server time in SAST</div>
-<div class="term-line">  <span class="t-c">molo</span>      say hi</div>
-<div class="term-line">  <span class="t-c">clear</span>     wipe the screen</div>
-<div class="term-line">  <span class="t-c">exit</span>      close terminal</div>`;
-
-    function write(html) {
-        body.insertAdjacentHTML('beforeend', html);
-        body.scrollTop = body.scrollHeight;
+    function write(html) { if (!termBody) return; termBody.insertAdjacentHTML('beforeend', html); termBody.scrollTop = termBody.scrollHeight; }
+    function runTerm(raw) {
+        const [cmdName, ...args] = raw.trim().split(/\s+/);
+        if (!cmdName) return;
+        write(line(`<span class="t-c">$</span> ${esc(raw)}`));
+        const name = cmdName.toLowerCase();
+        if (name === 'clear') { termBody.innerHTML = ''; return; }
+        if (name === 'exit') { closeTerm(); return; }
+        if (name === 'date') { write(line('  ' + new Date().toLocaleString('en-GB', { timeZone: 'Africa/Johannesburg' }) + ' SAST')); return; }
+        if (name === 'echo') { write(line('  ' + esc(args.join(' ')))); return; }
+        if (name === 'cd' && args[0]) { const id = args[0].replace(/\/$/, ''); if ($('#' + id)) { closeTerm(); go('#' + id); } else write(line(`cd: no such section: ${esc(args[0])}`, 't-e')); return; }
+        const b = banners[name];
+        if (b) { b.forEach(l => write(line(l))); return; }
+        write(line(`${esc(cmdName)}: command not found. Try <span class="t-c">help</span>.`, 't-e'));
     }
-
-    function echo(cmdText) {
-        write(`<div class="term-line input">chuma@soweto:~$ ${escapeHtml(cmdText)}</div>`);
-    }
-
-    function escapeHtml(s) {
-        return s.replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-    }
-
-    function run(raw) {
-        const cmdText = raw.trim();
-        if (!cmdText) return;
-        echo(cmdText);
-        history.unshift(cmdText);
-        historyIdx = -1;
-
-        const [cmd, ...args] = cmdText.split(/\s+/);
-        const key = cmd.toLowerCase();
-
-        if (key === 'clear') { body.innerHTML = ''; return; }
-        if (key === 'exit')  { close(); return; }
-
-        const handler = banners[key];
-        if (!handler) {
-            write(`<div class="term-line err">${escapeHtml(cmd)}: command not found. Try <span class="t-c">help</span>.</div>`);
-            return;
+    function openTerm() {
+        if (!term) return;
+        closeCmd();
+        term.hidden = false;
+        if (termBody && !termBody.childElementCount) {
+            write(line('<span class="t-c">chuma@soweto:~</span>  welcome.'));
+            write(line('  type <span class="t-c">help</span>, or <span class="t-c">cd work</span> to jump around. <span class="t-m">esc</span> closes.'));
+            write(line('&nbsp;'));
         }
-        const out = typeof handler === 'function' ? handler(args) : handler;
-        write(out);
-
-        if (key === 'skhokho') setTimeout(() => window.open('https://skhokholabs.xyz', '_blank'), 300);
+        setTimeout(() => termInput?.focus(), 30);
     }
-
-    function open() {
-        if (window.__closeCmdPalette) window.__closeCmdPalette();
-        term.classList.add('is-open');
-        term.setAttribute('aria-hidden', 'false');
-        if (!body.children.length) write(banner);
-        setTimeout(() => input.focus(), 60);
-    }
-
-    function close() {
-        term.classList.remove('is-open');
-        term.setAttribute('aria-hidden', 'true');
-    }
-
-    openTerminal = open;
-    closeTerminal = close;
-
-    document.addEventListener('keydown', (e) => {
-        const tag = (document.activeElement && document.activeElement.tagName) || '';
-        const typing = ['INPUT', 'TEXTAREA'].includes(tag);
-
-        if (e.key === '`' && !typing && !e.metaKey && !e.ctrlKey && !e.altKey) {
-            e.preventDefault();
-            term.classList.contains('is-open') ? close() : open();
-            return;
-        }
-        if (term.classList.contains('is-open')) {
-            if (e.key === 'Escape') { e.preventDefault(); close(); }
-        }
+    function closeTerm() { if (term) term.hidden = true; }
+    term?.addEventListener('click', e => { if (e.target.hasAttribute('data-term-close')) closeTerm(); });
+    termInput?.addEventListener('keydown', e => {
+        if (e.key === 'Enter') { runTerm(termInput.value); termInput.value = ''; }
     });
 
-    input.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            run(input.value);
-            input.value = '';
-        } else if (e.key === 'ArrowUp') {
-            e.preventDefault();
-            historyIdx = Math.min(history.length - 1, historyIdx + 1);
-            input.value = history[historyIdx] || '';
-        } else if (e.key === 'ArrowDown') {
-            e.preventDefault();
-            historyIdx = Math.max(-1, historyIdx - 1);
-            input.value = historyIdx < 0 ? '' : (history[historyIdx] || '');
-        }
-    });
-
-    term.querySelectorAll('[data-term-close]').forEach(el => {
-        el.addEventListener('click', close);
-    });
-})();
-
-// 11. Tiny toast helper
-function toast(msg, isError = false) {
-    let el = document.getElementById('chuma-toast');
-    if (!el) {
-        el = document.createElement('div');
-        el.id = 'chuma-toast';
-        el.style.cssText = `
-            position:fixed; bottom:90px; right:22px; z-index:1001;
-            padding:10px 16px; border-radius:8px;
-            font-family:var(--font-mono,monospace); font-size:0.82rem;
-            background:rgba(10,15,30,0.95); color:#64ffda;
-            border:1px solid rgba(100,255,218,0.35);
-            box-shadow:0 10px 30px -10px rgba(0,0,0,0.6);
-            transition:opacity 0.3s, transform 0.3s; opacity:0; transform:translateY(8px);`;
-        document.body.appendChild(el);
-    }
-    el.textContent = msg;
-    el.style.color = isError ? '#ff6b6b' : '#64ffda';
-    el.style.borderColor = isError ? 'rgba(255,107,107,0.4)' : 'rgba(100,255,218,0.35)';
-    requestAnimationFrame(() => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; });
-    clearTimeout(el._hideTimer);
-    el._hideTimer = setTimeout(() => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(8px)';
-    }, 1800);
-}
-
-// 12. 3D tilt on cards
-(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isTouch = window.matchMedia('(hover: none)').matches;
-    if (prefersReducedMotion || isTouch) return;
-
-    const selector = '.bento-card, .design-tile, .cert-card, .lane-card, .client-card, .lab-notes-card';
-    document.querySelectorAll(selector).forEach(card => {
-        card.classList.add('tilt-card');
-        let raf = null;
-        const max = 5; // max degrees
-
-        card.addEventListener('mousemove', (e) => {
-            if (raf) cancelAnimationFrame(raf);
-            raf = requestAnimationFrame(() => {
-                const rect = card.getBoundingClientRect();
-                const x = (e.clientX - rect.left) / rect.width - 0.5;
-                const y = (e.clientY - rect.top) / rect.height - 0.5;
-                card.style.transform = `perspective(900px) rotateY(${x * max}deg) rotateX(${-y * max}deg) translateY(-4px)`;
-            });
-        });
-
-        card.addEventListener('mouseleave', () => {
-            if (raf) cancelAnimationFrame(raf);
-            card.style.transform = '';
-        });
+    /* ---------- global keys ---------- */
+    addEventListener('keydown', e => {
+        const typing = /^(INPUT|TEXTAREA)$/.test(document.activeElement?.tagName || '') && !document.activeElement.closest('#cmd, #term');
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); cmd?.hidden ? openCmd() : closeCmd(); return; }
+        if (e.key === 'Escape') { closeCmd(); closeTerm(); return; }
+        if (e.key === '`' && !typing && cmd?.hidden) { e.preventDefault(); term?.hidden ? openTerm() : closeTerm(); }
     });
 })();
