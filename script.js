@@ -208,7 +208,7 @@
             '<span class="t-c">Chuma (Mike) Meyiswa</span>',
             '  Software Engineer (Backend) · AI agents · Blockchain',
             '  Associate Founder, SG Data Int · Founder, Skhokho Labs',
-            '  Technical Mentor, WeThinkCode_',
+            '  WeThinkCode_ graduate · former Technical Mentor',
             '  Soweto, Johannesburg, South Africa',
         ],
         now: [
@@ -223,7 +223,7 @@
             '  2026-10  Mgadi          HackSecure · SMME cyber',
             '  2026-10  Skhokho        FNB App of the Year',
             '  2026-10  SafeGuard SA   Gauteng Youth Tech Expo',
-            '  2026-07  GridWise       Microsoft Copilot Studio',
+            '  2026-07  GridWise       Microsoft Copilot Studio · WINNER',
             '',
             '  <a href="#work">→ details on the page</a>',
         ],
