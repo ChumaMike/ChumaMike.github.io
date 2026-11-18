@@ -140,6 +140,7 @@
         { t: 'GitHub · @ChumaMike', d: 'github.com/ChumaMike', kw: 'github code repos', run: () => open('https://github.com/ChumaMike') },
         { t: 'LinkedIn · chuma-mike', d: 'linkedin.com', kw: 'linkedin', run: () => open('https://www.linkedin.com/in/chuma-mike') },
         { t: 'WhatsApp', d: 'wa.me', kw: 'whatsapp message chat', run: () => open('https://wa.me/27693023981') },
+        { t: 'SG Data Int', d: 'sgdataint.co.za', kw: 'sg data int sgdataint company mentor', run: () => open('https://sgdataint.co.za') },
         { t: 'Skhokho Labs', d: 'skhokholabs.xyz', kw: 'skhokho labs company startup', run: () => open('https://skhokholabs.xyz') },
         { t: 'Toggle theme', d: 'light / dark', kw: 'theme dark light mode', run: () => $('#theme-btn')?.click() },
         { t: 'Open terminal', d: 'or press `', kw: 'terminal console shell easter egg', run: () => setTimeout(openTerm, 80) },
@@ -206,7 +207,8 @@
         whoami: [
             '<span class="t-c">Chuma (Mike) Meyiswa</span>',
             '  Software Engineer (Backend) · AI agents · Blockchain',
-            '  Founder, Skhokho Labs · Technical Mentor, WeThinkCode_',
+            '  Associate Founder, SG Data Int · Founder, Skhokho Labs',
+            '  Technical Mentor, WeThinkCode_',
             '  Soweto, Johannesburg, South Africa',
         ],
         now: [
